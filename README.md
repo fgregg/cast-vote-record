@@ -74,4 +74,4 @@ FROM
     mask;
 ```
 
-only aroun 14K!
+only around 14K!
