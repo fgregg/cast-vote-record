@@ -7,6 +7,8 @@ This repo contains
 * scripts for turning that into a normalized sqlite db and [suppressing some data to protect privacy](./scripts/suppress.sql)
 * [the sqlite db (password protected)](https://github.com/fgregg/cast-vote-record/releases/download/v1/cvr_geo_suppress.db.zip)
 
+*** NOTE: the votes in this database will not quite equal to the precinct level tallies reported on the Chicago Board of Election because of some suppression of some ballot to protect privacy ** 
+
 ### Provenance
 This data ultimately proceeds from a [FOIA request](https://www.muckrock.com/foi/chicago-169/cast-vote-record-120119/). I got these records on July 18, 2022.
 
