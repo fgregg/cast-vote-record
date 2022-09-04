@@ -20,8 +20,7 @@ This sqlite data is highly normalized. You may want to pivot the vote table wide
 with the table as it is.
 
 For example here's a query that gives the counts for the number of ballots
-that were aligned with the Girl, I Guess voter guide for the races that
-covere the whole city
+that were aligned with the [Girl, I Guess](https://docs.google.com/document/d/11diBlRiahHsCkHHpV1lt2fHHxgRwQpz-G0t9iGeBCtI/edit#heading=h.3jcg60s3d56u) voter guide for the races that covered the whole city
 
 ```sql
 WITH mask AS (
