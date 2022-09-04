@@ -47,7 +47,7 @@ FROM
 
 About 17K Ballots is the answer to that one!
 
-Here's a query for the Cook County Democratic slate:
+Here's a similar query for the [Cook County Democratic slate](https://www.cookcountydems.com/cook-county-democrats-endorse-slate-for-2022-primary/):
 
 ```sql
 WITH mask AS (
