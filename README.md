@@ -25,6 +25,20 @@ For example here's a query that gives the counts for the number of ballots
 that were aligned with the [Girl, I Guess](https://docs.google.com/document/d/11diBlRiahHsCkHHpV1lt2fHHxgRwQpz-G0t9iGeBCtI/edit#heading=h.3jcg60s3d56u) voter guide for the races that covered the whole city
 
 ```sql
+/* 
+2: JB Pritzker and Juliana Stratton
+8: Anna Valencia
+39: Toni Preckwinkle
+51: Fritz Kaegi
+38: Chakena D. Perry
+26: Mariyana T. Spyropoulos
+32: Precious W. Brady-Davis
+34: Sharon Waller
+*/
+SELECT
+    count(*)
+FROM
+    mask;
 WITH mask AS (
     SELECT
         ballot_id
@@ -33,18 +47,12 @@ WITH mask AS (
     GROUP BY
         ballot_id
     HAVING
-        sum(option_id = 2) -- JB Pritzker and Juliana Stratton
-        AND sum(option_id = 8) -- Anna Valencia
-        AND sum(option_id = 39) -- Toni Preckwinkle
-        AND sum(option_id = 51)  -- Fritz Kaegi
-        AND sum(option_id = 38) -- Chakena D. Perry
-        AND sum(option_id = 26) -- Mariyana T. Spyropoulos
-        AND sum(option_id = 32) -- Precious W. Brady-Davis
-        AND sum(option_id = 34)) -- Sharon Waller
+        sum(option_id IN (2, 8, 39, 51, 38, 26, 32, 34)) = 8
+)
 SELECT
     count(*)
 FROM
-    mask;
+    mask;    
 ```
 
 About 17K Ballots is the answer to that one!
