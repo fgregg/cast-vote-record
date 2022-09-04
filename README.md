@@ -1,5 +1,4 @@
-# cast-vote-record
-Chicago Cast Vote Records, June 2022 Primaries.
+# Chicago Cast Vote Records, June 2022 Primaries.
 
 This repo contains 
 
