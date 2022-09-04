@@ -4,7 +4,7 @@ Chicago Cast Vote Records, June 2022 Primaries.
 This repo contains 
 
 * [the raw CVR data (encrypted)](https://github.com/fgregg/cast-vote-record/raw/main/raw/CVR_Export_20220718163851.7z.gpg)
-* scripts for turning that into a normalized sqlite db
+* scripts for turning that into a normalized sqlite db and suppressing cells values to protect privacy
 * [the sqlite db (password protected)](https://github.com/fgregg/cast-vote-record/releases/download/v1/cvr.db.zip)
 
 ### Provenance
