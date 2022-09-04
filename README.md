@@ -38,7 +38,7 @@ WITH mask AS (
         AND sum(option_id = 38) -- Chakena D. Perry
         AND sum(option_id = 26) -- Mariyana T. Spyropoulos
         AND sum(option_id = 32) -- Precious W. Brady-Davis
-        AND sum(optio n_id = 34)) -- Sharon Waller
+        AND sum(option_id = 34)) -- Sharon Waller
 SELECT
     count(*)
 FROM
