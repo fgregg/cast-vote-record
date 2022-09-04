@@ -3,8 +3,9 @@
 This repo contains 
 
 * the raw CVR data (encrypted)
+* the precincts used in the June 2022 Primaries (raw dir)
 * scripts for turning that into a normalized sqlite db and [suppressing some data to protect privacy](./scripts/suppress.sql)
-* [the sqlite db (password protected)](https://github.com/fgregg/cast-vote-record/releases/download/v1/cvr.db.zip)
+* [the sqlite db (password protected)](https://github.com/fgregg/cast-vote-record/releases/download/v1/cvr_geo_suppress.db.zip)
 
 ### Provenance
 This data ultimately proceeds from a [FOIA request](https://www.muckrock.com/foi/chicago-169/cast-vote-record-120119/). I got these records on July 18, 2022.
