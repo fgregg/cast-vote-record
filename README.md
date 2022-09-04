@@ -3,7 +3,7 @@
 This repo contains 
 
 * the raw CVR data (encrypted)
-* the precincts used in the June 2022 Primaries (raw dir)
+* the [precincts used in the June 2022 Primaries](./raw)
 * scripts for turning that into a normalized sqlite db and [suppressing some data to protect privacy](./scripts/suppress.sql)
 * [the sqlite db (password protected)](https://github.com/fgregg/cast-vote-record/releases/download/v1/cvr_geo_suppress.db.zip)
 
