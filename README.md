@@ -78,7 +78,7 @@ WITH mask AS (
     GROUP BY
         ballot_id
     HAVING
-        sum(option_id IN (2, 6, 39, 51, 27, 26, 28, 36)) >= 7
+        sum(option_id IN (2, 6, 39, 51, 27, 26, 28, 36)) = 8
 )
 SELECT
     count(*)
