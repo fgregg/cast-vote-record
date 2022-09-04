@@ -1,8 +1,7 @@
-cvr_geo_suppress.db.zip : cvr.db
+cvr_geo_suppress.db.zip : cvr_geo_suppress.db
 	zip -e $@ $<
 
 cvr_geo_suppress.db : cvr.db
-	cp $< $@
 	sqlite3 $@ < scripts/suppress.sql
 	sqlite-utils transform $@ ballot \
             --drop CvrNumber \
@@ -15,7 +14,6 @@ cvr_geo_suppress.db : cvr.db
 
 cvr.db : vote.csv
 	csvs-to-sqlite $^ $@
-	cp $@ cvr.basic.db
 	sqlite-utils extract $@ vote CvrNumber TabulatorNum BatchId RecordId CountingGroup Ward Precinct Portion Ballot --table ballot --fk-column ballot_id
 	sqlite-utils extract $@ vote race option party --table option --fk-column option_id
 	sqlite-utils extract $@ option race --table race --fk-column race_id
@@ -26,17 +24,6 @@ cvr.db : vote.csv
 	sqlite-utils add-foreign-key $@ ballot_race race_id race id
 	sqlite3 $@ < scripts/cleanup.sql
 
-cvr_geo_suppress.db : cvr.db
-	cp $< $@
-	sqlite3 $@ < scripts/suppress.sql
-	sqlite-utils transform $@ ballot \
-            --drop CvrNumber \
-            --drop BatchId \
-            --drop RecordId \
-            --drop CountingGroup \
-            --drop Portion \
-            --drop Ballot \
-            --drop TabulatorNum
 
 .INTERMEDIATE : ballot.csv vote.csv cvr_wide.csv
 
@@ -54,6 +41,6 @@ CVR_Export_20220718163851.csv : raw/CVR_Export_20220718163851.7z
 
 
 raw/CVR_Export_20220718163851.7z : raw/CVR_Export_20220718163851.7z.gpg
-	gpg --decrypt $@ > $@
+	gpg --decrypt $< > $@
 
 
