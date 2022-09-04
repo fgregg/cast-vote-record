@@ -60,6 +60,16 @@ About 17K Ballots is the answer to that one!
 Here's a similar query for the [Cook County Democratic slate](https://www.cookcountydems.com/cook-county-democrats-endorse-slate-for-2022-primary/):
 
 ```sql
+/*
+2: JB Pritzker and Juliana Stratton
+6: Alexi Giannoulias
+39: Toni Preckwinkle
+51: Fritz Kaegi
+27: Yumeka Brown
+26: Mariyana T. Spyropoulos
+28: Patricia Theresa Flynn
+36: Daniel Pogorzelski
+*/ 
 WITH mask AS (
     SELECT
         ballot_id
@@ -68,18 +78,11 @@ WITH mask AS (
     GROUP BY
         ballot_id
     HAVING
-        sum(option_id = 2) -- JB Pritzker and Juliana Stratton
-        AND sum(option_id = 6) -- Alexi Giannoulias
-        AND sum(option_id = 39) -- Toni Preckwinkle
-        AND sum(option_id = 51) -- Fritz Kaegi
-        AND sum(option_id = 27) -- Yumeka Brown
-        AND sum(option_id = 26) -- Mariyana T. Spyropoulos
-        AND sum(option_id = 28) -- Patricia Theresa Flynn
-        AND sum(option_id = 36)) -- Daniel Pogorzelski
+        sum(option_id IN (2, 6, 39, 51, 27, 26, 28, 36)) >= 7
+)
 SELECT
     count(*)
-FROM
-    mask;
+FROM    
 ```
 
 only around 14K!
