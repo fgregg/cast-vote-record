@@ -46,3 +46,30 @@ FROM
 ```
 
 About 17K Ballots is the answer to that one!
+
+Here's a query for the Cook County Democratic slate:
+
+```sql
+WITH mask AS (
+    SELECT
+        ballot_id
+    FROM
+        vote
+    GROUP BY
+        ballot_id
+    HAVING
+        sum(option_id = 2) -- JB Pritzker and Juliana Stratton
+        AND sum(option_id = 6) -- Alexi Giannoulias
+        AND sum(o ption_id = 39) -- Toni Preckwinkle
+        AND sum(option_id = 51) -- Fritz Kaegi
+        AND sum(option_id = 27) -- Yumeka Brown
+        AND sum(option_id = 26) -- Mariyana T. Spyropoulos
+        AND sum(option_id = 28) -- Patricia Theresa Flynn
+        AND sum(optio n_id = 36)) -- Daniel Pogorzelski
+SELECT
+    count(*)
+FROM
+    mask;
+```
+
+only aroun 14K!
