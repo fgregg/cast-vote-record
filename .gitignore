@@ -1,0 +1,12 @@
+raw/CVR_Export_20220718163851.7z
+CVR_Export_20220718163851.csv
+cvr_wide.csv
+vote.csv
+ballot.csv
+cvr.db
+cvr.db.zip
+cvr_geo_suppress.db
+*~
+*#
+.env
+.DS_Store

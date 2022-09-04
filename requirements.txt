@@ -1,0 +1,3 @@
+csvkit
+sqlite-utils
+csvs-to-sqlite
