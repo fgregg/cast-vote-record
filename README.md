@@ -35,10 +35,6 @@ that were aligned with the [Girl, I Guess](https://docs.google.com/document/d/11
 32: Precious W. Brady-Davis
 34: Sharon Waller
 */
-SELECT
-    count(*)
-FROM
-    mask;
 WITH mask AS (
     SELECT
         ballot_id
