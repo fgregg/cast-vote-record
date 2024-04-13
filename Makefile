@@ -20,8 +20,17 @@ cvr.db : vote.csv
 	sqlite3 $@ < scripts/ballot_race_mask.sql
 	sqlite-utils extract $@ ballot_race_mask mask --table ballot_race_mask_normal --fk-column race_mask_id
 	sqlite3 $@ < scripts/unwind_ballot_race.sql
+	sqlite3 $@ < scripts/add_race_to_vote.sql
+	sqlite-utils transform $@ ballot_race --type race_id integer 
 	sqlite-utils add-foreign-key $@ ballot ballot_race_id ballot_race id
 	sqlite-utils add-foreign-key $@ ballot_race race_id race id
+	sqlite-utils add-foreign-keys $@ vote race_id race id \
+           vote option_id option id \
+           vote ballot_id ballot id
+	sqlite-utils create-index $@ vote ballot_id
+	sqlite-utils create-index $@ vote race_id ballot_id
+	sqlite-utils create-index $@ ballot_race id
+
 	sqlite3 $@ < scripts/cleanup.sql
 
 
@@ -30,7 +39,7 @@ cvr.db : vote.csv
 vote.csv : cvr_wide.csv
 	cat $< | python scripts/to_long.py > $@
 
-cvr_wide.csv : CVR_Export_20220718163851.csv
+cvr_wide.csv : raw/CVR_Export_20240404140023.csv
 	cat $< | \
             python scripts/flatten_header.py | \
             python scripts/expand_cols.py > $@

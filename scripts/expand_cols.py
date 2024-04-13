@@ -22,16 +22,16 @@ writer.writeheader()
 
 for row in reader:
     ward, precinct, portion = re.match(
-        "Ward (\d+) Precinct (\d+)-(\d+) .*", row.pop("PrecinctPortion")
+        r"Ward (\d+) Precinct (\d+)-(\d+) .*", row.pop("PrecinctPortion")
     ).groups()
     row["Ward"] = ward
     row["Precinct"] = precinct
     row["Portion"] = portion
 
-    ballot, ballot_type = re.match(
-        "Ballot (\d+) - Type (\d+) .*", row.pop("BallotType")
-        ).groups()
-    row["Ballot"] = ballot
+    # ballot, ballot_type = re.match(
+    #     "Ballot (\d+) - Type (\d+) .*", row.pop("BallotType")
+    #     ).groups()
+    row["Ballot"] = row.pop("BallotType")
 
     del row["ImprintedId"]
     
