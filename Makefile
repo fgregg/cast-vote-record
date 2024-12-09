@@ -13,7 +13,8 @@ cvr_geo_suppress.db : cvr.db
             --drop TabulatorNum
 
 cvr.db : vote.csv
-	csvs-to-sqlite $^ $@
+	cat scripts/create_vote_table.sql | sqlite3 $@
+	tail -n +2 $< | sqlite3 $@ ".mode csv" ".import /dev/stdin vote"
 	sqlite-utils extract $@ vote CvrNumber TabulatorNum BatchId RecordId CountingGroup Ward Precinct Portion Ballot --table ballot --fk-column ballot_id
 	sqlite-utils extract $@ vote race option party --table option --fk-column option_id
 	sqlite-utils extract $@ option race --table race --fk-column race_id
@@ -25,8 +26,8 @@ cvr.db : vote.csv
 	sqlite-utils add-foreign-key $@ ballot ballot_race_id ballot_race id
 	sqlite-utils add-foreign-key $@ ballot_race race_id race id
 	sqlite-utils add-foreign-keys $@ vote race_id race id \
-           vote option_id option id \
-           vote ballot_id ballot id
+            vote option_id option id \
+            vote ballot_id ballot id
 	sqlite-utils create-index $@ vote ballot_id
 	sqlite-utils create-index $@ vote race_id ballot_id
 	sqlite-utils create-index $@ ballot_race id
@@ -39,17 +40,14 @@ cvr.db : vote.csv
 vote.csv : cvr_wide.csv
 	cat $< | python scripts/to_long.py > $@
 
-cvr_wide.csv : raw/CVR_Export_20240404140023.csv
+cvr_wide.csv : CVR_Export_20241126151047.csv
 	cat $< | \
             python scripts/flatten_header.py | \
             python scripts/expand_cols.py > $@
 
-CVR_Export_20220718163851.csv : raw/CVR_Export_20220718163851.7z
+CVR_Export_20241126151047.csv : raw/CVR_Export_20241126151047.7z
 	7zz e $< $@
 	touch $@
 
-
-raw/CVR_Export_20220718163851.7z : raw/CVR_Export_20220718163851.7z.gpg
-	gpg --decrypt $< > $@
 
 
